@@ -12,6 +12,6 @@ enum TodoStatus {
     IN_PROGRESS = 2
 }
 
-export type NewTodo = Omit<Todo, "id" | "createdAt">
+export type NewTodo = Partial<Omit<Todo, "id" | "createdAt">>
 
 export { Todo, TodoStatus };
