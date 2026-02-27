@@ -1,18 +1,30 @@
 import { TodoApi } from './todo-api';
-import { Todo } from './types';
+import {NewTodo, Todo, TodoStatus} from './types';
 
 export class TodoService {
   constructor(private readonly api: TodoApi) { }
 
   async create(title: string, description = ''): Promise<Todo> {
-    throw new Error('create: not implemented');
+    const newTodo: NewTodo = {
+      title: title,
+      description: description
+    }
+
+    return await this.api.add(newTodo)
   }
 
   async toggleStatus(id: number): Promise<Todo> {
-    throw new Error('toggleStatus: not implemented');
+    const update = { status: TodoStatus.COMPLETED }
+
+    return await this.api.update(id, update)
   }
 
   async search(keyword: string): Promise<Todo[]> {
-    throw new Error('search: not implemented');
+    keyword = keyword.toLowerCase()
+
+    return (await this.api.getAll()).filter(
+        todo => todo.title.toLowerCase().includes(keyword) ||
+            todo.description.toLowerCase().includes(keyword)
+    )
   }
 }
