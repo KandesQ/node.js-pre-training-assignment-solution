@@ -11,7 +11,7 @@ export class TodoApi {
 
   async add(newTodo: NewTodo): Promise<Todo> {
     const createdTodo: Todo = {
-      id: this.repo.getMaxId(),
+      id: this.repo.getMaxId() + 1,
       title: newTodo.title,
       description: newTodo.description,
       status: newTodo.status,

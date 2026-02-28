@@ -1,4 +1,4 @@
-import { TodoApi } from './todo-api';
+import {TodoApi} from './todo-api';
 import {NewTodo, Todo, TodoStatus} from './types';
 
 export class TodoService {
@@ -7,7 +7,8 @@ export class TodoService {
   async create(title: string, description = ''): Promise<Todo> {
     const newTodo: NewTodo = {
       title: title,
-      description: description
+      description: description,
+      status: TodoStatus.PENDING
     }
 
     return await this.api.add(newTodo)

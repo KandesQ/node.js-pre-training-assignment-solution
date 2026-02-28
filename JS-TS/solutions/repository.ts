@@ -59,7 +59,7 @@ export class InMemoryRepository<T extends { id: number }> {
   }
 }
 
-class TodoNotFoundError extends Error {
+export class TodoNotFoundError extends Error {
   constructor(msg: string) {
     super(msg)
     this.name = "TodoNotFoundError"
