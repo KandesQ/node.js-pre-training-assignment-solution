@@ -28,4 +28,8 @@ export class TodoService {
             todo.description.toLowerCase().includes(keyword)
     )
   }
+
+  async getAllTodos(): Promise<Todo[]> {
+    return await this.api.getAll()
+  }
 }
