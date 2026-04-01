@@ -35,7 +35,11 @@ import {ToDoList} from "../task-01/ToDoList";
  * - Use controlled components for form inputs
  * - Handle form submission properly
  */
-export const AddToDo: React.FC = () => {
+type AddProps = {
+    setTodos?: (value: React.SetStateAction<Todo[]>) => void;
+}
+
+export const AddToDo: React.FC<AddProps> = ({ setTodos }) => {
   // TODO: Implement the AddToDo component
   // 
   // Requirements:
@@ -52,7 +56,7 @@ export const AddToDo: React.FC = () => {
     const [id, setId] = useState(0);
     const [inputTitle, setInputTitle] = useState("");
 
-    const [todos, setTodos] = useState<Todo[]>([]);
+    // upd: I removed todos state to reuse AddToDo component further
 
     const addTodo = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -61,7 +65,8 @@ export const AddToDo: React.FC = () => {
         if (!inputTitle.trim()) return
 
         setId(prevId => prevId + 1);
-        setTodos(prevTodos => [
+
+        setTodos?.(prevTodos => [
             ...prevTodos,
             {id: id, title: inputTitle.trim(), completed: false}
         ])
@@ -84,7 +89,6 @@ export const AddToDo: React.FC = () => {
                 Add
             </button>
         </form>
-        <ToDoList todos={todos}/>
     </div>
   );
 }; 

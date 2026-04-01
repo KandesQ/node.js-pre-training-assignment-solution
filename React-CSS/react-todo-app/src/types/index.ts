@@ -10,6 +10,7 @@ export interface TodoListProps {
 
 export interface TodoItemProps {
   todo: Todo;
+  onComplete?: (id: number) => void;
 }
 
 export interface ActiveCountProps {

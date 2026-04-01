@@ -34,7 +34,7 @@ import { TodoItemProps } from '../../types';
  * - Use camelCase for attributes (onClick, style, etc.)
  * - JavaScript expressions can be embedded using {}
  */
-export const ToDoItem: React.FC<TodoItemProps> = ({ todo }) => {
+export const ToDoItem: React.FC<TodoItemProps> = ({ todo, onComplete }) => {
   // TODO: Implement the ToDoItem component
   // 
   // Requirements:
@@ -66,6 +66,11 @@ export const ToDoItem: React.FC<TodoItemProps> = ({ todo }) => {
                 {!todo.completed ? "not completed": "completed"}
             </span>
         </p>
+        <button
+            onClick={() => onComplete?.(todo.id)}
+        >
+            Complete
+        </button>
     </div>
   );
 }; 
