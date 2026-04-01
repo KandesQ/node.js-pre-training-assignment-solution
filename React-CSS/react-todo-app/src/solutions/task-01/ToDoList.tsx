@@ -1,5 +1,6 @@
 import React from 'react';
 import { TodoListProps } from '../../types';
+import {ToDoItem} from "../task-02/ToDoItem";
 
 /**
  * Task 1: ToDoList Component
@@ -59,11 +60,7 @@ export const ToDoList: React.FC<TodoListProps> = ({ todos }) => {
             }}
           >
               {todos.map(todo => (
-                  <div
-                      key={todo.id}
-                  >
-                      <label>{todo.title} - {!todo.completed ? "not": ""} completed</label>
-                  </div>
+                  <ToDoItem todo={todo}/>
               ))}
           </div>
 
