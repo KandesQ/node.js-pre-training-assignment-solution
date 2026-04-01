@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Todo } from '../../types';
+import {AddToDo} from "../task-03/AddToDo";
+import {ToDoItem} from "../task-02/ToDoItem";
+import {CompleteToDoList} from "../task-04/CompleteToDoList";
 
 /**
  * Task 5: FilteredToDoList Component
@@ -63,11 +66,53 @@ export const FilteredToDoList: React.FC = () => {
   //   return true; // 'all' case
   // });
 
+    // State
+    const [todos, setTodos] = useState<Todo[]>([]);
+    const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
+
+    // Derived
+    const filteredTodos = todos.filter(todo => {
+        if (filter === "active") return !todo.completed;
+        if (filter === "completed") return todo.completed;
+
+        return filter === "all";
+    })
+
+    // Actions
+    const markCompleted = (id: number) => {
+        setTodos(prevTodos =>
+            prevTodos.map(todo =>
+                todo.id === id ? {...todo, completed: true}: todo
+            )
+        );
+    }
+
+
   return (
     <div>
-      {/* TODO: Replace this with your implementation */}
       <h4>Filtered ToDo List Component</h4>
-      <p>Implement derived state and filtering here</p>
+        <button onClick={() => setFilter("all")}>
+            All
+        </button>
+        <button onClick={() => setFilter("active")}>
+            Active
+        </button>
+        <button
+            onClick={() => setFilter("completed")}
+            style={{ marginBottom: "10px"}}
+        >
+            Completed
+        </button>
+        <AddToDo setTodos={setTodos}/>
+        {
+            filteredTodos.map(todo =>
+                <ToDoItem
+                    key={todo.id}
+                    todo={todo}
+                    onComplete={markCompleted}
+                />
+            )
+        }
     </div>
   );
 }; 
